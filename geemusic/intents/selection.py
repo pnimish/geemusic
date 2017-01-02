@@ -91,6 +91,8 @@ def play_playlist(playlist_name):
 
     # Retreve the content of all playlists in a users library
     all_playlists = api.get_all_user_playlist_contents()
+    for pl in all_playlists:
+        app.logger.debug("Playlist: %s" % pl['name'])
 
     # Give each playlist a score based on its similarity to the requested 
     # playlist name

@@ -8,6 +8,7 @@ from fuzzywuzzy import fuzz
 def play_artist(artist_name):
     api = GMusicWrapper.generate_api()
 
+    app.logger.debug("Fetching artist: %s" % artist_name)
     # Fetch the artist
     artist = api.get_artist(artist_name)
 

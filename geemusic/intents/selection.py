@@ -120,6 +120,7 @@ def play_playlist(playlist_name):
 
     # Get a streaming URL for the first song in the playlist
     stream_url = api.get_stream_url(first_song_id)
+    app.logger.debug("Stream url: %s" % stream_url)
 
     speech_text = "Playing songs from %s" % (best_match['name'])
     return audio(speech_text).play(stream_url) \

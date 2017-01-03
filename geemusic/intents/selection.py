@@ -87,6 +87,7 @@ def play_artist_radio(artist_name):
 
 @ask.intent("GeeMusicPlayPlaylistIntent")
 def play_playlist(playlist_name):
+    app.logger.debug("Fetching playlist %s" % playlist_name)
     api = GMusicWrapper.generate_api()
 
     # Retreve the content of all playlists in a users library
@@ -113,6 +114,7 @@ def play_playlist(playlist_name):
         return statement("Sorry, I couldn't find that playlist in your library.")
 
     # Add songs from the playlist onto our queue
+    app.logger.debug("Added %d tracks from playlist: %s" % (len(best_match['tracks']), best_match['name']))
     first_song_id = queue.reset(best_match['tracks'])
 
     # Get a streaming URL for the first song in the playlist

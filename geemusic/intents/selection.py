@@ -90,7 +90,8 @@ def play_artist_radio(artist_name):
 @ask.intent("GeeMusicPlayPlaylistIntent")
 def play_playlist(playlist_name):
     app.logger.debug("Fetching playlist %s" % playlist_name)
-    playlist_name = MAPPINGS['PLAYLIST'].get(playlist_name.lower(), playlist_name)
+    request_name = playlist_name.lower().replace(" ", "")
+    playlist_name = MAPPINGS['PLAYLIST'].get(request_name, playlist_name)
     app.logger.debug("Fetching playlist after mapping %s" % playlist_name)
     api = GMusicWrapper.generate_api()
 
@@ -99,7 +100,6 @@ def play_playlist(playlist_name):
 
     # Give each playlist a score based on its similarity to the requested 
     # playlist name
-    request_name = playlist_name.lower().replace(" ", "")
     scored_playlists = []
     for i, playlist in enumerate(all_playlists):
         name = playlist['name'].lower().replace(" ", "")

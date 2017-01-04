@@ -1,3 +1,8 @@
+##
+## Mappings since alexa does not understand Indian playlist and artist names correctly.
+## Do not include any spaces in the keys. The values should match the playlist names as closely as possible.
+##
+
 MAPPINGS = {
 
         "PLAYLIST": {
@@ -13,7 +18,7 @@ MAPPINGS = {
             "lm": "lata",
             "mirzaa": "ghalib",
             "mg": "ghalib",
-            "m gee": "ghalib",
+            "mgee": "ghalib",
             "mm": "madan mohan",
             "mh": "mehdi hassan",
             "mikesh": "mukesh",

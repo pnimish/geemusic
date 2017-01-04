@@ -79,7 +79,7 @@ def play_artist_radio(artist_name):
         ## Look for station
         artist = api.search_station(artist_name, 'artist')
         if not artist:
-            return statement("Sorry, I couldn't find artist [%s]" % (artist_name))
+            return statement("Sorry, I couldn't find artist %s." % (artist_name))
 
     station_id = api.get_station("%s Radio" % artist['name'], artist_id=artist['artistId'])
     # TODO: Handle track duplicates

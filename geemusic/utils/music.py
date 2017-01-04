@@ -31,7 +31,7 @@ class GMusicWrapper:
         max_top_tracks = 100 if includeTracks else 1
         return self._api.get_artist_info(search[0]['artistId'], max_top_tracks=max_top_tracks)
 
-    def search_station(self, name):
+    def search_station(self, name, seed_type=None):
         search = self._search("station", name)
         if not search:
             return False

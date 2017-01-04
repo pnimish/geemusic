@@ -36,11 +36,12 @@ class GMusicWrapper:
 
     def search_station(self, name, seed_type=None):
         search = self._search("station", name)
+        log.debug("search: %s" % search)
         if not search:
             return False
         for station in search:
             log.debug("Station: %s" % station)
-            artistId = station.get('station', {}).get('seed', {}).get('artistId')
+            artistId = station.get('seed', {}).get('artistId')
             if artistId:
                 break
         if not artistId:

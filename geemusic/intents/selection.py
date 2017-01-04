@@ -2,6 +2,7 @@ from flask_ask import statement, audio
 from os import environ
 from geemusic import ask, app, queue
 from geemusic.utils.music import GMusicWrapper
+from geemusic.utils.mappings import MAPPINGS
 from fuzzywuzzy import fuzz
 
 @ask.intent("GeeMusicPlayArtistIntent")
@@ -89,6 +90,8 @@ def play_artist_radio(artist_name):
 @ask.intent("GeeMusicPlayPlaylistIntent")
 def play_playlist(playlist_name):
     app.logger.debug("Fetching playlist %s" % playlist_name)
+    playlist_name = MAPPINGS['PLAYLIST'].get(playlist_name.lower(), playlist_name)
+    app.logger.debug("Fetching playlist after mapping %s" % playlist_name)
     api = GMusicWrapper.generate_api()
 
     # Retreve the content of all playlists in a users library
@@ -112,7 +115,7 @@ def play_playlist(playlist_name):
 
     app.logger.debug("Top score: [%s, %s]" % (top_scoring['score'], best_match['name']))
     # Make sure we have a decent match (the score is n where 0 <= n <= 100)
-    if top_scoring['score'] < 60:
+    if top_scoring['score'] < 50:
         return statement("Sorry, I couldn't find that playlist in your library.")
 
     # Add songs from the playlist onto our queue

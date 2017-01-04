@@ -76,6 +76,7 @@ def play_artist_radio(artist_name):
     artist = api.get_artist(artist_name, includeTracks=False)
 
     if artist == False:
+        app.logger.debug("Cannot find artist: %s. Looking for session." % artist_name)
         ## Look for station
         artist = api.search_station(artist_name, 'artist')
         if not artist:

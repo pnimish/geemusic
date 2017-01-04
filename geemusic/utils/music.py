@@ -34,14 +34,15 @@ class GMusicWrapper:
 
     def search_station(self, name, seed_type=None):
         search = self._search("station", name)
-        current_app.logger.debug("search: %s" % search)
+        current_app.logger.debug("Found %d stations for %s" % (len(search), name))
         if not search:
             return False
         for station in search:
-            current_app.logger.debug("Station: %s" % station)
+            #current_app.logger.debug("Station: %s" % station)
             artistId = station.get('seed', {}).get('artistId')
             if artistId:
                 break
+        current_app.logger.debug("Found artistId: %s" % artistId)
         if not artistId:
             return False
         return self._api.get_artist_info(artistId, max_top_tracks=1)

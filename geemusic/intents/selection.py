@@ -68,12 +68,15 @@ def play_song(song_name, artist_name):
 @ask.intent("GeeMusicPlayArtistRadioIntent")
 def play_artist_radio(artist_name):
     api = GMusicWrapper.generate_api()
+    request_name = artist_name.lower().replace(" ", "")
+    artist_name = MAPPINGS.get(request_name, artist_name)
+    app.logger.debug("Looking for radio stations for [%s]" % (artist_name))
 
     # Fetch the artist
     artist = api.get_artist(artist_name)
 
     if artist == False:
-        return statement("Sorry, I couldn't find that artist")
+        return statement("Sorry, I couldn't find artist [%s]" % (artist_name))
 
     station_id = api.get_station("%s Radio" % artist['name'], artist_id=artist['artistId'])
     # TODO: Handle track duplicates
@@ -91,7 +94,7 @@ def play_artist_radio(artist_name):
 def play_playlist(playlist_name):
     app.logger.debug("Fetching playlist %s" % playlist_name)
     request_name = playlist_name.lower().replace(" ", "")
-    playlist_name = MAPPINGS['PLAYLIST'].get(request_name, playlist_name)
+    playlist_name = MAPPINGS.get(request_name, playlist_name)
     app.logger.debug("Fetching playlist after mapping %s" % playlist_name)
     api = GMusicWrapper.generate_api()
 

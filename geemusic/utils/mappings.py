@@ -3,6 +3,7 @@ MAPPINGS = {
         "PLAYLIST": {
 
             "atmy": "atma",
+            "ba": "begum akhtar",
             "iskia": "ishquia",
             "kl": "saigal",
             "kg": "kumar - nirguni bhajans",

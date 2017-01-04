@@ -1,8 +1,6 @@
 from os import environ
 from gmusicapi import Mobileclient
-import logging
-
-log = logging.getLogger(__name__)
+from flask import current_app
 
 class GMusicWrapper:
     def __init__(self, username, password):
@@ -36,11 +34,11 @@ class GMusicWrapper:
 
     def search_station(self, name, seed_type=None):
         search = self._search("station", name)
-        log.debug("search: %s" % search)
+        current_app.logger.debug("search: %s" % search)
         if not search:
             return False
         for station in search:
-            log.debug("Station: %s" % station)
+            current_app.logger.debug("Station: %s" % station)
             artistId = station.get('seed', {}).get('artistId')
             if artistId:
                 break

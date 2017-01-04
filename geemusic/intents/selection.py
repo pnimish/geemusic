@@ -11,7 +11,7 @@ def play_artist(artist_name):
 
     app.logger.debug("Fetching artist: %s" % artist_name)
     # Fetch the artist
-    artist = api.get_artist(artist_name)
+    artist = api.get_artist(artist_name, includeTracks=True)
 
     if artist == False:
         return statement("Sorry, I couldn't find that artist")
@@ -73,10 +73,13 @@ def play_artist_radio(artist_name):
     app.logger.debug("Looking for radio stations for [%s]" % (artist_name))
 
     # Fetch the artist
-    artist = api.get_artist(artist_name)
+    artist = api.get_artist(artist_name, includeTracks=False)
 
     if artist == False:
-        return statement("Sorry, I couldn't find artist [%s]" % (artist_name))
+        ## Look for station
+        artist = api.search_station(artist_name, 'artist')
+        if not artist:
+            return statement("Sorry, I couldn't find artist [%s]" % (artist_name))
 
     station_id = api.get_station("%s Radio" % artist['name'], artist_id=artist['artistId'])
     # TODO: Handle track duplicates

@@ -22,13 +22,26 @@ class GMusicWrapper:
 
         return map(lambda x: x[query_type], results[hits_key])
 
-    def get_artist(self, name):
+    def get_artist(self, name, includeTracks=False):
         search = self._search("artist", name)
 
         if len(search) == 0:
             return False
 
-        return self._api.get_artist_info(search[0]['artistId'], max_top_tracks=100)
+        max_top_tracks = 100 if includeTracks else 1
+        return self._api.get_artist_info(search[0]['artistId'], max_top_tracks=max_top_tracks)
+
+    def search_station(self, name):
+        search = self._search("station", name)
+        if not search:
+            return False
+        for station in search:
+            artistId = station.get('station', {}).get('seed', {}).get('artistId')
+            if artistId:
+                break
+        if not artistId:
+            return False
+        return self._api.get_artist_info(artistId, max_top_tracks=1)
 
     def get_album(self, name, artist_name=None):
         if artist_name:

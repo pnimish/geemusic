@@ -101,6 +101,7 @@ def play_playlist(playlist_name):
 
     # Give each playlist a score based on its similarity to the requested 
     # playlist name
+    request_name = playlist_name.lower().replace(" ", "")
     scored_playlists = []
     for i, playlist in enumerate(all_playlists):
         name = playlist['name'].lower().replace(" ", "")

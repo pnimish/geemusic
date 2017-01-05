@@ -7,11 +7,12 @@ MAPPINGS = {
 
     "atmy": "atma",
     "ba": "begum akhtar",
+    "gdm": "GaDiMa",
     "iskia": "ishquia",
     "kl": "saigal",
     "kg": "kumar - nirguni bhajans",
     "kk": "kishore kumar",
-    "kkg": "katyar kaljat ghusli",
+    "kkg": "katyar kaljat ghusli new",
     "kh": "khaiyam",
     "lm": "lata",
     "mirzaa": "ghalib",

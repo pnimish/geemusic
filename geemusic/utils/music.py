@@ -28,8 +28,8 @@ class GMusicWrapper:
         if len(search) == 0:
             return False
         
-        playlistDetails = self._api.get_shared_playlist_contents(search[0]['shareToken'])
-        return playlistDetails
+        tracks = self._api.get_shared_playlist_contents(search[0]['shareToken'])
+        return tracks
 
     def get_artist(self, name, includeTracks=False):
         search = self._search("artist", name)

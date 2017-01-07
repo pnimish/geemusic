@@ -18,12 +18,9 @@ def play_artist(artist_name):
     if artist:
         tracks = artist['topTracks']
     else:
-        playlist = api.search_playlist(artist_name)
-        if playlist:
-            tracks = playlist['tracks']
-            artist = playlist
+        tracks = api.search_playlist(artist_name)
 
-    if artist == False:
+    if not tracks:
         return statement("Sorry, I couldn't find the artist %s." % artist_name)
 
     # Setup the queue

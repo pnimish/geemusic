@@ -5,6 +5,7 @@
 
 MAPPINGS = {
 
+    "ab": "asha bhosle",
     "atmy": "atma",
     "ba": "begum akhtar",
     "gdm": "GaDiMa",
@@ -14,7 +15,8 @@ MAPPINGS = {
     "kk": "kishore kumar",
     "kkg": "katyar kaljat ghusli new",
     "kh": "khaiyam",
-    "lm": "lata",
+    "lm": "lata mangeshkar",
+    "lt": "lata",
     "mirzaa": "ghalib",
     "mg": "ghalib",
     "mgee": "ghalib",

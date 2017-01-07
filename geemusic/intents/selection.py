@@ -10,6 +10,9 @@ def play_artist(artist_name):
     api = GMusicWrapper.generate_api()
 
     app.logger.debug("Fetching artist: %s" % artist_name)
+    request_name = artist_name.lower().replace(" ", "")
+    artist_name = MAPPINGS.get(request_name, artist_name)
+    app.logger.debug("Fetching artist after mapping %s" % artist_name)
     # Fetch the artist
     artist = api.get_artist(artist_name, includeTracks=True)
 
@@ -76,7 +79,7 @@ def play_artist_radio(artist_name):
     artist = api.get_artist(artist_name, includeTracks=False)
 
     if artist == False:
-        app.logger.debug("Cannot find artist: %s. Looking for session." % artist_name)
+        app.logger.debug("Cannot find artist: %s. Looking for station." % artist_name)
         ## Look for station
         artist = api.search_station(artist_name, 'artist')
         if not artist:

@@ -6,6 +6,7 @@
 MAPPINGS = {
 
     "ab": "asha bhosle",
+    "ashaa": "asha bhosle",
     "atmy": "atma",
     "ba": "begum akhtar",
     "gdm": "GaDiMa",

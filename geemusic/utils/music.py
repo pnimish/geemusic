@@ -23,6 +23,14 @@ class GMusicWrapper:
 
         return map(lambda x: x[query_type], results[hits_key])
 
+    def search_playlist(self, name):
+        search = self._search("playlist", name)
+        if len(search) == 0:
+            return False
+        
+        playlistDetails = self._api.get_shared_playlist_contents(search[0]['shareToken'])
+        return playlistDetails
+
     def get_artist(self, name, includeTracks=False):
         search = self._search("artist", name)
 

@@ -15,17 +15,24 @@ def play_artist(artist_name):
     app.logger.debug("Fetching artist after mapping %s" % artist_name)
     # Fetch the artist
     artist = api.get_artist(artist_name, includeTracks=True)
+    if artist:
+        tracks = artist['topTracks']
+    else:
+        playlist = api.search_playlist(artist_name)
+        if playlist:
+            tracks = playlist['tracks']
+            artist = playlist
 
     if artist == False:
-        return statement("Sorry, I couldn't find that artist")
+        return statement("Sorry, I couldn't find the artist %s." % artist_name)
 
     # Setup the queue
-    first_song_id = queue.reset(artist['topTracks'])
+    first_song_id = queue.reset(tracks)
 
     # Get a streaming URL for the top song
     stream_url = api.get_stream_url(first_song_id)
 
-    speech_text = "Playing top tracks from %s" % artist['name']
+    speech_text = "Playing top tracks from %s" % artist_name
     return audio(speech_text).play(stream_url)
 
 @ask.intent("GeeMusicPlayAlbumIntent")
